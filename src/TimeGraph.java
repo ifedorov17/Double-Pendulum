@@ -44,11 +44,6 @@ public class TimeGraph {
     Color titleTextCl;
     Color scaleTextCl;
 
-
-    //--------------------------------------
-    //-----------  Constructors  -----------
-    //---------------------------------------
-
     TimeGraph() {
         this.title = null;
         this.originX = 0;
@@ -78,40 +73,6 @@ public class TimeGraph {
         this.dimY = dimY;
     }
 
-    TimeGraph(int dimX, int dimY, int capacity, Mode mode) {
-        this(dimX, dimY, capacity);
-        this.mode = mode;
-    }
-
-    //---------------------------------------
-    //---------------------------------------
-
-    //---------------------------------
-    //-----------  Getters  -----------
-    //---------------------------------
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    int getDimX() { return this.dimX; }
-    int getDimY() { return this.dimY; }
-
-    int getCapacity() { return this.capacity; }
-
-    boolean filled() { return this.filled; }
-
-    ArrayList<Dot> getDots() { return this.dots; }
-
-    double getValue(int index) {
-        if(index < 0 || index >= this.dots.size()) {
-            return 0;
-        }
-
-        return this.dots.get(index).getY();
-    }
-
     public double getMinY() {
         return minY;
     }
@@ -119,18 +80,6 @@ public class TimeGraph {
     public double getMaxY() {
         return maxY;
     }
-
-    double getLastValue() {
-        return this.dots.get(this.dots.size() - 1).getY();
-    }
-
-    //---------------------------------
-    //---------------------------------
-
-    //---------------------------------
-    //-----------  Setters  -----------
-    //---------------------------------
-
 
     public void setTitle(String title) {
         this.title = title;
@@ -142,21 +91,6 @@ public class TimeGraph {
     void setOrigin(int originX, int originY) {
         this.originX = originX;
         this.originY = originY;
-    }
-
-    public void setDimX(int dimX) { this.dimX = dimX; }
-    public void setDimY(int dimY) { this.dimY = dimY; }
-
-    public void setCapacity(int capacity) { this.capacity = capacity; }
-
-    public void setMode(int Mode) { this.mode = mode; }
-
-    public void setRenderScale(boolean renderScale) {
-        this.renderScale = renderScale;
-    }
-
-    public void setRenderTitle(boolean renderTitle) {
-        this.renderTitle = renderTitle;
     }
 
     public void setInteger(boolean integer) {
@@ -210,13 +144,6 @@ public class TimeGraph {
     public void setScaleTextCl(Color scaleTextCl) {
         this.scaleTextCl = scaleTextCl;
     }
-    //---------------------------------
-    //---------------------------------
-
-    //---------------------------------
-    //-----------  Methods  -----------
-    //---------------------------------
-
 
     void clear() {
         this.dots = new ArrayList<>();
@@ -312,23 +239,6 @@ public class TimeGraph {
     }
 
 
-
-    //---------------------------------
-    //---------------------------------
-
-    //-----------------------------------
-    //-----------  Renderers  -----------
-    //-----------------------------------
-
-  /*
-  color plainCl;
-  color borderCl;
-  color dotCl;
-  color lineCl;
-  color levelLineCl;
-  color valueTextCl;
-  */
-
     void renderPlain() {
         App.processingRef.strokeWeight(1);
         App.processingRef.stroke(this.borderCl.getRGB(), this.borderCl.getAlpha());
@@ -389,7 +299,6 @@ public class TimeGraph {
     void renderAxisScale() {
         App.processingRef.fill(this.scaleTextCl.getRGB());
         App.processingRef.textSize(this.textSize);
-        //App.processingRef.text(App.processingRef.millis()/1000, this.originX + this.dimX - (this.textSize + 20), this.originY + this.dimY - (this.textSize - 4));
         if (this.integer) {
             App.processingRef.text((int) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
             App.processingRef.text((int) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));
@@ -415,6 +324,4 @@ public class TimeGraph {
         if(renderTitle) renderTitle();
     }
 
-    //-----------------------------------
-    //-----------------------------------
 }

@@ -15,15 +15,4 @@ public class Solver {
         return T;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setDt(double dt) {
-        this.dt = dt;
-    }
-
-    public void setT(double t) {
-        T = t;
-    }
 }

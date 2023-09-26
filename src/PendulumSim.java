@@ -1,8 +1,4 @@
-import java.awt.*;
-import java.io.EOFException;
-import java.io.IOException;
-import java.sql.Time;
-import java.util.ArrayList;
+import java.awt.Color;
 
 public class PendulumSim {
     private Initializer initializer;

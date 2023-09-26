@@ -1,11 +1,6 @@
-import processing.core.*;
-import controlP5.*;
+import processing.core.PApplet;
 
-import java.io.IOException;
-
-public class App extends PApplet{
-
-    public static int renderType = 0;
+public class App extends PApplet {
 
     public static PApplet processingRef;
     public PendulumSim simulation;
@@ -14,6 +9,7 @@ public class App extends PApplet{
         size(2000, 1000);
     }
 
+    @Override
     public void setup() {
         background(0);
         frameRate(1000);
@@ -23,10 +19,12 @@ public class App extends PApplet{
         this.simulation.solve();
     }
 
+    @Override
     public void draw() {
         if (!this.simulation.isError()) this.simulation.animate();
     }
 
+    @Override
     public void mouseClicked() {
         this.simulation.resetAnimationTick();
     }

@@ -2,11 +2,6 @@ public class Problem {
     private String title;
     private Segment[] segments;
     private Solver solver;
-
-    public String getTitle() {
-        return title;
-    }
-
     public Segment[] getSegments() {
         return segments;
     }

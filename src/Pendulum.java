@@ -1,21 +1,20 @@
-import java.awt.*;
+import java.awt.Color;
+
 public class Pendulum {
     private Dot fixPoint;
     private double mass;
     private double length;
     private double theta;
     private double omega;
-
     private Color color;
 
-    //Constructors
     public Pendulum() {
         this.fixPoint = new Dot();
         this.mass = 1;
         this.length = 1;
         this.theta = 0;
         this.omega = 0;
-        this.color = new Color (210, 10, 10);
+        this.color = new Color(210, 10, 10);
     }
 
     public Pendulum (double mass, double length, double theta, double omega) {
@@ -31,19 +30,9 @@ public class Pendulum {
         this.fixPoint = fixPoint;
     }
 
-    //Setters
-
 
     public void setFixPoint(Dot fixPoint) {
         this.fixPoint = fixPoint;
-    }
-
-    public void setMass(double mass) {
-        this.mass = mass;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
     }
 
     public void setTheta(double theta) {
@@ -54,16 +43,6 @@ public class Pendulum {
         this.omega = omega;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    //Getters
-
-
-    public Dot getFixPoint() {
-        return fixPoint;
-    }
 
     public double getMass() {
         return mass;
