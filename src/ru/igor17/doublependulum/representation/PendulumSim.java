@@ -3,7 +3,6 @@ package ru.igor17.doublependulum.representation;
 import ru.igor17.doublependulum.model.Dot;
 import ru.igor17.doublependulum.model.DoublePendulum;
 import ru.igor17.doublependulum.model.PendulumSegment;
-import ru.igor17.doublependulum.model.Segment;
 import ru.igor17.doublependulum.problem.Initializer;
 import ru.igor17.doublependulum.problem.Problem;
 import ru.igor17.doublependulum.solver.EuSolver;
@@ -14,7 +13,10 @@ import java.awt.Color;
 import static ru.igor17.doublependulum.App.processingRef;
 
 public class PendulumSim {
-    private final Initializer initializer;
+
+    public static final Color SEGMENT_COLOR = new Color(20, 150, 170);
+
+    public static final Dot FIRST_FIX_POINT = new Dot(500, 500);
     private EuSolver euSolver;
     private RKSolver rkSolver;
     private DoublePendulum dPendulum;
@@ -35,32 +37,21 @@ public class PendulumSim {
         this.tick = 0;
         this.error = false;
 
-        this.initializer = new Initializer(problemFile);
+        final Initializer initializer = new Initializer(problemFile);
 
         try {
-            this.initializer.readProblem();
+            initializer.readProblem();
         } catch (Exception exception) {
             exception.printStackTrace();
             this.error = true;
         }
 
         if(!error) {
-            Problem problem = this.initializer.getProblem();
-            Segment[] segments = problem.getSegments();
+            Problem problem = initializer.getProblem();
+            problem.getPendulumSegments().get(0).setFixPoint(FIRST_FIX_POINT);
 
-            PendulumSegment p1 = new PendulumSegment(new Dot(500, 500),
-                    segments[0].getMass(),
-                    segments[0].getLength(),
-                    segments[0].getTheta(),
-                    segments[0].getOmega());
-
-            PendulumSegment p2 = new PendulumSegment(
-                    segments[1].getMass(),
-                    segments[1].getLength(),
-                    segments[1].getTheta(),
-                    segments[1].getOmega());
-
-            this.dPendulum = new DoublePendulum(p1, p2);
+            this.dPendulum = new DoublePendulum(problem.getPendulumSegments().get(0),
+                    problem.getPendulumSegments().get(1));
 
             switch (problem.getSolver().getType()) {
                 case "Euler" -> {
@@ -254,7 +245,7 @@ public class PendulumSim {
 
         Dot endPoint1 = firstSegment.getEndPoint();
 
-        processingRef.stroke(firstSegment.getColor().getRGB());
+        processingRef.stroke(SEGMENT_COLOR.getRGB());
         processingRef.strokeWeight(3);
 
         processingRef.line(
@@ -274,7 +265,7 @@ public class PendulumSim {
 
         Dot endPoint2 = secondSegment.getEndPoint();
 
-        processingRef.stroke(secondSegment.getColor().getRGB());
+        processingRef.stroke(SEGMENT_COLOR.getRGB());
         processingRef.strokeWeight(3);
 
         processingRef.line(
