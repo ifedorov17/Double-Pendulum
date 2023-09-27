@@ -2,7 +2,7 @@ package ru.igor17.doublependulum.representation;
 
 import ru.igor17.doublependulum.model.Dot;
 import ru.igor17.doublependulum.model.DoublePendulum;
-import ru.igor17.doublependulum.model.Pendulum;
+import ru.igor17.doublependulum.model.PendulumSegment;
 import ru.igor17.doublependulum.model.Segment;
 import ru.igor17.doublependulum.problem.Initializer;
 import ru.igor17.doublependulum.problem.Problem;
@@ -48,13 +48,14 @@ public class PendulumSim {
             Problem problem = this.initializer.getProblem();
             Segment[] segments = problem.getSegments();
 
-            Pendulum p1 = new Pendulum(new Dot(500, 500),
+            PendulumSegment p1 = new PendulumSegment(new Dot(500, 500),
                     segments[0].getMass(),
                     segments[0].getLength(),
                     segments[0].getTheta(),
                     segments[0].getOmega());
 
-            Pendulum p2 = new Pendulum(segments[1].getMass(),
+            PendulumSegment p2 = new PendulumSegment(
+                    segments[1].getMass(),
                     segments[1].getLength(),
                     segments[1].getTheta(),
                     segments[1].getOmega());
@@ -237,7 +238,7 @@ public class PendulumSim {
             this.energyGraph.addValue(energy);
         }
 
-        this.dPendulum.render();
+        renderDoublePendulum(dPendulum);
         this.theta1Graph.render();
         this.theta2Graph.render();
         this.omega1Graph.render();
@@ -245,5 +246,47 @@ public class PendulumSim {
         this.energyGraph.render();
 
         this.tick += 1;
+    }
+
+    private void renderDoublePendulum(final DoublePendulum doublePendulum) {
+
+        final PendulumSegment firstSegment = doublePendulum.getFirstSeg();
+
+        Dot endPoint1 = firstSegment.getEndPoint();
+
+        processingRef.stroke(firstSegment.getColor().getRGB());
+        processingRef.strokeWeight(3);
+
+        processingRef.line(
+                (float)firstSegment.getFixPoint().getX(),
+                (float)firstSegment.getFixPoint().getY(),
+                (float)endPoint1.getX(),
+                (float)endPoint1.getY());
+
+        processingRef.stroke(Color.CYAN.getRGB());
+        processingRef.circle((float)firstSegment.getFixPoint().getX(),
+                (float)firstSegment.getFixPoint().getY(), 5);
+        processingRef.stroke(Color.ORANGE.getRGB());
+        processingRef.circle((float)endPoint1.getX(), (float)endPoint1.getY(), 5);
+
+
+        final PendulumSegment secondSegment = doublePendulum.getSecondSeg();
+
+        Dot endPoint2 = secondSegment.getEndPoint();
+
+        processingRef.stroke(secondSegment.getColor().getRGB());
+        processingRef.strokeWeight(3);
+
+        processingRef.line(
+                (float)secondSegment.getFixPoint().getX(),
+                (float)secondSegment.getFixPoint().getY(),
+                (float)endPoint2.getX(),
+                (float)endPoint2.getY());
+
+        processingRef.stroke(Color.CYAN.getRGB());
+        processingRef.circle((float)secondSegment.getFixPoint().getX(),
+                (float)secondSegment.getFixPoint().getY(), 5);
+        processingRef.stroke(Color.ORANGE.getRGB());
+        processingRef.circle((float)endPoint2.getX(), (float)endPoint2.getY(), 5);
     }
 }
