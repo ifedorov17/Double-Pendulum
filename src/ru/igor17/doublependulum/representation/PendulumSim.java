@@ -65,26 +65,26 @@ public class PendulumSim {
             this.dPendulum = new DoublePendulum(problem.getPendulumSegments().get(0),
                     problem.getPendulumSegments().get(1));
 
-            switch (problem.getSolver().getType()) {
+            switch (problem.getSolveParameters().getType()) {
                 case "Euler" -> {
                     this.solverType = 0;
                     this.euSolver = new EuSolver();
-                    this.euSolver.setdPendulum(this.dPendulum);
-                    this.euSolver.setT(problem.getSolver().getT());
-                    this.euSolver.setDt(problem.getSolver().getDt());
+                    this.euSolver.setDoublePendulum(this.dPendulum);
+                    this.euSolver.setT(problem.getSolveParameters().getT());
+                    this.euSolver.setDt(problem.getSolveParameters().getDt());
                 }
                 case "Runge-Kutta" -> {
                     this.solverType = 1;
                     this.rkSolver = new RKSolver();
-                    this.rkSolver.setdPendulum(this.dPendulum);
-                    this.rkSolver.setT(problem.getSolver().getT());
-                    this.rkSolver.setDt(problem.getSolver().getDt());
+                    this.rkSolver.setDoublePendulum(this.dPendulum);
+                    this.rkSolver.setT(problem.getSolveParameters().getT());
+                    this.rkSolver.setDt(problem.getSolveParameters().getDt());
                 }
             }
 
             int graphCap = 250;
 
-            this.animLength =(int) (problem.getSolver().getT() / problem.getSolver().getDt());
+            this.animLength =(int) (problem.getSolveParameters().getT() / problem.getSolveParameters().getDt());
 
             this.animStep = (double) this.animLength / (double) graphCap;
 
@@ -157,20 +157,6 @@ public class PendulumSim {
 
             omegaScaleSynchronizer.addGraph(omega1Graph);
             omegaScaleSynchronizer.addGraph(omega2Graph);
-
-            this.energyGraph = new TimeGraph(1000, 300, graphCap);
-            this.energyGraph.setTitle("Theta");
-            this.energyGraph.setOrigin(1000, 600);
-            this.energyGraph.setPlainCl(new Color(0, 0, 0));
-            this.energyGraph.setBorderCl(new Color(100, 100, 100));
-            this.energyGraph.setDotCl(Color.CYAN);
-            this.energyGraph.setLineCl(Color.CYAN);
-            this.energyGraph.setLevelLineCl(Color.CYAN);
-            this.energyGraph.setValueTextCl(Color.WHITE);
-            this.energyGraph.setTitleTextCl(Color.WHITE);
-            this.energyGraph.setScaleTextCl(Color.WHITE);
-            this.energyGraph.setTextSize(12);
-            this.energyGraph.setInteger(false);
         }
     }
 
@@ -222,7 +208,6 @@ public class PendulumSim {
                 theta2 = this.rkSolver.getTheta2().get(this.tick);
                 omega1 = this.rkSolver.getOmega1().get(this.tick);
                 omega2 = this.rkSolver.getOmega2().get(this.tick);
-                energy = this.rkSolver.getEnergy().get(this.tick);
             }
         }
 
@@ -238,7 +223,6 @@ public class PendulumSim {
             this.theta2Graph.addValue(theta2);
             this.omega1Graph.addValue(omega1);
             this.omega2Graph.addValue(omega2);
-            this.energyGraph.addValue(energy);
         }
 
         renderDoublePendulum(dPendulum);
@@ -246,8 +230,6 @@ public class PendulumSim {
         this.theta2Graph.render();
         this.omega1Graph.render();
         this.omega2Graph.render();
-        this.energyGraph.render();
-
         this.tick += 1;
     }
 

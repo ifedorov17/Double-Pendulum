@@ -14,8 +14,8 @@
 			"omega" : 0.01
 		}
 	],
-	"solver" : {
-		"type" : "Euler",
+	"solveParameters" : {
+		"type" : "Runge-Kutta",
 		"dt" : 0.08,
 		"T" : 500
 	}
