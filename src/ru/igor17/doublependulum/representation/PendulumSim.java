@@ -17,21 +17,33 @@ public class PendulumSim {
     public static final Color SEGMENT_COLOR = new Color(20, 150, 170);
 
     public static final Dot FIRST_FIX_POINT = new Dot(500, 500);
+
     private EuSolver euSolver;
+
     private RKSolver rkSolver;
+
     private DoublePendulum dPendulum;
+
     private int solverType;
+
     private int tick;
+
     private int animLength;
+
     private double animStep;
+
     private boolean error;
 
     private TimeGraph theta1Graph;
+
     private TimeGraph theta2Graph;
+
     private TimeGraph omega1Graph;
+
     private TimeGraph omega2Graph;
 
     private TimeGraph energyGraph;
+
 
     public PendulumSim (String problemFile) {
         this.tick = 0;
