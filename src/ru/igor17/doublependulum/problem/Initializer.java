@@ -8,6 +8,7 @@ import java.io.FileReader;
 
 public class Initializer {
     private final String problemFile;
+
     private Problem problem;
 
     public Initializer(String fileName) {
