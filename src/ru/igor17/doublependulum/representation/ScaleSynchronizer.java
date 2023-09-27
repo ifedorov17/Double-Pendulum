@@ -1,7 +1,6 @@
 package ru.igor17.doublependulum.representation;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ScaleSynchronizer {
     ArrayList<TimeGraph> syncedGraphs;
@@ -18,20 +17,18 @@ public class ScaleSynchronizer {
         double maxY = 0;
         double minY = Double.MAX_VALUE;
 
-        for(Iterator<TimeGraph> iter = syncedGraphs.iterator(); iter.hasNext();) {
-            TimeGraph timeGraph = iter.next();
+        for (TimeGraph timeGraph : syncedGraphs) {
             double graphMinY = timeGraph.getMinY();
             double graphMaxY = timeGraph.getMaxY();
-            if(maxY < graphMaxY) {
+            if (maxY < graphMaxY) {
                 maxY = graphMaxY;
             }
-            if(minY > graphMinY) {
+            if (minY > graphMinY) {
                 minY = graphMinY;
             }
         }
 
-        for(Iterator<TimeGraph> iter = syncedGraphs.iterator(); iter.hasNext();) {
-            TimeGraph timeGraph = iter.next();
+        for (TimeGraph timeGraph : syncedGraphs) {
             timeGraph.setMaxY(maxY);
             timeGraph.setMinY(minY);
         }

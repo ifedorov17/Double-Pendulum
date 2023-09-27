@@ -1,13 +1,17 @@
 package ru.igor17.doublependulum.representation;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.igor17.doublependulum.model.Dot;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import static ru.igor17.doublependulum.App.processingRef;
 
+
+@Getter
+@Setter
 public class TimeGraph {
     public enum Mode {
         SCROLLING, STATIONARY
@@ -25,9 +29,9 @@ public class TimeGraph {
 
     private boolean filled;
 
-    private Mode mode;
-    private boolean renderScale;
-    private boolean renderTitle;
+    private final Mode mode;
+    private final boolean renderScale;
+    private final boolean renderTitle;
     private boolean integer;
 
     private ArrayList<Dot> dots;
@@ -61,7 +65,7 @@ public class TimeGraph {
         this.renderScale = true;
         this.renderTitle = true;
         this.integer = false;
-        this.dots = new ArrayList<Dot>();
+        this.dots = new ArrayList<>();
         this.scaleSynchronizer = null;
         this.maxY = Double.MIN_VALUE;
         this.minY = Double.MAX_VALUE;
@@ -78,21 +82,6 @@ public class TimeGraph {
         this.dimX = dimX;
         this.dimY = dimY;
     }
-
-    public double getMinY() {
-        return minY;
-    }
-
-    public double getMaxY() {
-        return maxY;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    void setOriginX(int originX) { this.originX = originX; }
-    void setOriginY(int originY) { this.originY = originY; }
 
     void setOrigin(int originX, int originY) {
         this.originX = originX;
@@ -195,10 +184,9 @@ public class TimeGraph {
     void updateMinY() {
         double newMinY = this.maxY;
 
-        for (Iterator<Dot> iter = this.dots.iterator(); iter.hasNext();){
-            Dot dot = iter.next();
+        for (Dot dot : this.dots) {
             double y = dot.getY();
-            if(y < newMinY) {
+            if (y < newMinY) {
                 newMinY = y;
             }
         }
@@ -210,10 +198,9 @@ public class TimeGraph {
     void updateMaxY() {
         double newMaxY = this.minY;
 
-        for (Iterator<Dot> iter = this.dots.iterator(); iter.hasNext();){
-            Dot dot = iter.next();
+        for (Dot dot : this.dots) {
             double y = dot.getY();
-            if(y > newMaxY) {
+            if (y > newMaxY) {
                 newMaxY = y;
             }
         }
@@ -253,13 +240,11 @@ public class TimeGraph {
     }
 
     void renderDotsLine() {
-        int maxX = processingRef.millis();
 
         Dot absoluteCoordinates;
         Dot previousAbsoluteCoordinates = new Dot();
 
         for(int dotIdx = 0; dotIdx < this.dots.size(); dotIdx++) {
-            Dot dot = this.dots.get(dotIdx);
             absoluteCoordinates = calcAbsCoordinates(dotIdx);
 
             processingRef.strokeWeight(1);
@@ -275,7 +260,8 @@ public class TimeGraph {
                         (float)absoluteCoordinates.getX(), (float)absoluteCoordinates.getY());
             }
 
-            previousAbsoluteCoordinates.setXY(absoluteCoordinates);
+            previousAbsoluteCoordinates.setX(absoluteCoordinates.getX());
+            previousAbsoluteCoordinates.setY(absoluteCoordinates.getY());
         }
     }
 
@@ -298,27 +284,27 @@ public class TimeGraph {
 
         processingRef.fill(this.valueTextCl.getRGB());
         processingRef.textSize(this.textSize);
-        if (this.integer) processingRef.text((int)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
-        else processingRef.text((float)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
+        if (this.integer) processingRef.text((int)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40f, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
+        else processingRef.text((float)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40f, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
     }
 
     void renderAxisScale() {
         processingRef.fill(this.scaleTextCl.getRGB());
         processingRef.textSize(this.textSize);
         if (this.integer) {
-            processingRef.text((int) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
-            processingRef.text((int) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));
+            processingRef.text((int) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5f, this.originY + this.textSize + 4f);
+            processingRef.text((int) (this.minY), this.originX + 5f, this.originY + this.dimY - (this.textSize - 4f));
         }
         else {
-            processingRef.text((float) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
-            processingRef.text((float) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));
+            processingRef.text((float) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5f, this.originY + this.textSize + 4f);
+            processingRef.text((float) (this.minY), this.originX + 5f, this.originY + this.dimY - (this.textSize - 4f));
         }
     }
 
     void renderTitle() {
         processingRef.fill(this.titleTextCl.getRGB());
         processingRef.textSize(this.textSize);
-        processingRef.text(this.title, this.originX + this.dimX - (this.title.length() * this.textSize + 4), this.originY + this.textSize + 4);
+        processingRef.text(this.title, this.originX + this.dimX - (this.title.length() * this.textSize + 4f), this.originY + this.textSize + 4f);
     }
 
     void render() {

@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class Initializer {
-    private String problemFile;
+    private final String problemFile;
     private Problem problem;
 
     public Initializer(String fileName) {

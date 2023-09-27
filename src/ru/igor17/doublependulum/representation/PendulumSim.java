@@ -14,7 +14,7 @@ import java.awt.Color;
 import static ru.igor17.doublependulum.App.processingRef;
 
 public class PendulumSim {
-    private Initializer initializer;
+    private final Initializer initializer;
     private EuSolver euSolver;
     private RKSolver rkSolver;
     private DoublePendulum dPendulum;
@@ -40,7 +40,7 @@ public class PendulumSim {
         try {
             this.initializer.readProblem();
         } catch (Exception exception) {
-            System.out.println(exception.toString());
+            exception.printStackTrace();
             this.error = true;
         }
 

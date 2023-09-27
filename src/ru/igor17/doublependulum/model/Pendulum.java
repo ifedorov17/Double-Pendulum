@@ -1,8 +1,14 @@
 package ru.igor17.doublependulum.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.Color;
 
 import static ru.igor17.doublependulum.App.processingRef;
+
+@Getter
+@Setter
 public class Pendulum {
     private Dot fixPoint;
     private double mass;
@@ -31,36 +37,6 @@ public class Pendulum {
     public Pendulum (Dot fixPoint, double mass, double length, double theta, double omega) {
         this(mass, length, theta, omega);
         this.fixPoint = fixPoint;
-    }
-
-
-    public void setFixPoint(Dot fixPoint) {
-        this.fixPoint = fixPoint;
-    }
-
-    public void setTheta(double theta) {
-        this.theta = theta;
-    }
-
-    public void setOmega(double omega) {
-        this.omega = omega;
-    }
-
-
-    public double getMass() {
-        return mass;
-    }
-
-    public double getLength() {
-        return length;
-    }
-
-    public double getTheta() {
-        return theta;
-    }
-
-    public double getOmega() {
-        return omega;
     }
 
     public Dot getEndPoint() {
