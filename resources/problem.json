@@ -1,6 +1,6 @@
 {
 	"title" : "Double compound pendulum",
-	"segments" : [
+	"pendulumSegments" : [
 		{
 			"length" : 15,
 			"mass" : 1,
