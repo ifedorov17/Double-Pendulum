@@ -1,6 +1,5 @@
 package ru.igor17.doublependulum.representation;
 
-import ru.igor17.doublependulum.App;
 import ru.igor17.doublependulum.model.Dot;
 import ru.igor17.doublependulum.model.DoublePendulum;
 import ru.igor17.doublependulum.model.Pendulum;
@@ -11,6 +10,8 @@ import ru.igor17.doublependulum.solver.EuSolver;
 import ru.igor17.doublependulum.solver.RKSolver;
 
 import java.awt.Color;
+
+import static ru.igor17.doublependulum.App.processingRef;
 
 public class PendulumSim {
     private Initializer initializer;
@@ -198,7 +199,7 @@ public class PendulumSim {
             return;
         }
 
-        App.processingRef.background(0);
+        processingRef.background(0);
         double theta1 = 0;
         double theta2 = 0;
         double omega1 = 0;

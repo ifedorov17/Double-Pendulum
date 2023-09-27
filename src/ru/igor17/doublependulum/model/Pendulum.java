@@ -1,8 +1,8 @@
 package ru.igor17.doublependulum.model;
 
-import ru.igor17.doublependulum.App;
 import java.awt.Color;
 
+import static ru.igor17.doublependulum.App.processingRef;
 public class Pendulum {
     private Dot fixPoint;
     private double mass;
@@ -70,13 +70,13 @@ public class Pendulum {
     public void render() {
         Dot endPoint = getEndPoint();
 
-        App.processingRef.stroke(this.color.getRGB());
-        App.processingRef.strokeWeight(3);
-        App.processingRef.line((float)this.fixPoint.getX(), (float)this.fixPoint.getY(), (float)endPoint.getX(), (float)endPoint.getY());
-        App.processingRef.stroke(Color.CYAN.getRGB());
-        App.processingRef.circle((float)this.fixPoint.getX(), (float)this.fixPoint.getY(), 5);
-        App.processingRef.stroke(Color.ORANGE.getRGB());
-        App.processingRef.circle((float)endPoint.getX(), (float)endPoint.getY(), 5);
+        processingRef.stroke(this.color.getRGB());
+        processingRef.strokeWeight(3);
+        processingRef.line((float)this.fixPoint.getX(), (float)this.fixPoint.getY(), (float)endPoint.getX(), (float)endPoint.getY());
+        processingRef.stroke(Color.CYAN.getRGB());
+        processingRef.circle((float)this.fixPoint.getX(), (float)this.fixPoint.getY(), 5);
+        processingRef.stroke(Color.ORANGE.getRGB());
+        processingRef.circle((float)endPoint.getX(), (float)endPoint.getY(), 5);
     }
 
 

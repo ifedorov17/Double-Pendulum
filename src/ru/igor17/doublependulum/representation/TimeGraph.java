@@ -1,11 +1,12 @@
 package ru.igor17.doublependulum.representation;
 
 import ru.igor17.doublependulum.model.Dot;
-import ru.igor17.doublependulum.App;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import static ru.igor17.doublependulum.App.processingRef;
 
 public class TimeGraph {
     public enum Mode {
@@ -158,7 +159,7 @@ public class TimeGraph {
     }
     void addValue(double val) {
 
-        Dot newDot = new Dot(App.processingRef.millis() / 1000., val);
+        Dot newDot = new Dot(processingRef.millis() / 1000., val);
 
         if(filled) {
             if(mode == Mode.STATIONARY) return;
@@ -245,14 +246,14 @@ public class TimeGraph {
 
 
     void renderPlain() {
-        App.processingRef.strokeWeight(1);
-        App.processingRef.stroke(this.borderCl.getRGB(), this.borderCl.getAlpha());
-        App.processingRef.fill(this.plainCl.getRGB(), this.plainCl.getAlpha());
-        App.processingRef.rect(this.originX, this.originY, this.dimX, this.dimY);
+        processingRef.strokeWeight(1);
+        processingRef.stroke(this.borderCl.getRGB(), this.borderCl.getAlpha());
+        processingRef.fill(this.plainCl.getRGB(), this.plainCl.getAlpha());
+        processingRef.rect(this.originX, this.originY, this.dimX, this.dimY);
     }
 
     void renderDotsLine() {
-        int maxX = App.processingRef.millis();
+        int maxX = processingRef.millis();
 
         Dot absoluteCoordinates;
         Dot previousAbsoluteCoordinates = new Dot();
@@ -261,16 +262,16 @@ public class TimeGraph {
             Dot dot = this.dots.get(dotIdx);
             absoluteCoordinates = calcAbsCoordinates(dotIdx);
 
-            App.processingRef.strokeWeight(1);
-            App.processingRef.stroke(this.dotCl.getRGB());
-            App.processingRef.fill(this.dotCl.getRGB());
-            App.processingRef.circle((float)absoluteCoordinates.getX(), (float)absoluteCoordinates.getY(), 2);
+            processingRef.strokeWeight(1);
+            processingRef.stroke(this.dotCl.getRGB());
+            processingRef.fill(this.dotCl.getRGB());
+            processingRef.circle((float)absoluteCoordinates.getX(), (float)absoluteCoordinates.getY(), 2);
 
             if(dotIdx != 0) {
-                App.processingRef.strokeWeight(1);
-                App.processingRef.stroke(this.lineCl.getRGB());
+                processingRef.strokeWeight(1);
+                processingRef.stroke(this.lineCl.getRGB());
 
-                App.processingRef.line((float)previousAbsoluteCoordinates.getX(), (float)previousAbsoluteCoordinates.getY(),
+                processingRef.line((float)previousAbsoluteCoordinates.getX(), (float)previousAbsoluteCoordinates.getY(),
                         (float)absoluteCoordinates.getX(), (float)absoluteCoordinates.getY());
             }
 
@@ -283,10 +284,10 @@ public class TimeGraph {
 
         Dot lastAbsoluteCoordinates = calcAbsCoordinates(this.dots.size() - 1);
 
-        App.processingRef.strokeWeight(1);
-        App.processingRef.stroke(this.levelLineCl.getRGB(), 130);
+        processingRef.strokeWeight(1);
+        processingRef.stroke(this.levelLineCl.getRGB(), 130);
 
-        App.processingRef.line(this.originX, (float)lastAbsoluteCoordinates.getY(),
+        processingRef.line(this.originX, (float)lastAbsoluteCoordinates.getY(),
                 (float)lastAbsoluteCoordinates.getX(), (float)lastAbsoluteCoordinates.getY());
     }
 
@@ -295,29 +296,29 @@ public class TimeGraph {
 
         Dot lastAbsoluteCoordinates = calcAbsCoordinates(this.dots.size() - 1);
 
-        App.processingRef.fill(this.valueTextCl.getRGB());
-        App.processingRef.textSize(this.textSize);
-        if (this.integer) App.processingRef.text((int)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
-        else App.processingRef.text((float)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
+        processingRef.fill(this.valueTextCl.getRGB());
+        processingRef.textSize(this.textSize);
+        if (this.integer) processingRef.text((int)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
+        else processingRef.text((float)(this.dots.get(this.dots.size() - 1).getY()), this.originX + this.textSize + 40, (float)(lastAbsoluteCoordinates.getY() - (this.textSize - 4)));
     }
 
     void renderAxisScale() {
-        App.processingRef.fill(this.scaleTextCl.getRGB());
-        App.processingRef.textSize(this.textSize);
+        processingRef.fill(this.scaleTextCl.getRGB());
+        processingRef.textSize(this.textSize);
         if (this.integer) {
-            App.processingRef.text((int) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
-            App.processingRef.text((int) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));
+            processingRef.text((int) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
+            processingRef.text((int) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));
         }
         else {
-            App.processingRef.text((float) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
-            App.processingRef.text((float) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));
+            processingRef.text((float) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
+            processingRef.text((float) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));
         }
     }
 
     void renderTitle() {
-        App.processingRef.fill(this.titleTextCl.getRGB());
-        App.processingRef.textSize(this.textSize);
-        App.processingRef.text(this.title, this.originX + this.dimX - (this.title.length() * this.textSize + 4), this.originY + this.textSize + 4);
+        processingRef.fill(this.titleTextCl.getRGB());
+        processingRef.textSize(this.textSize);
+        processingRef.text(this.title, this.originX + this.dimX - (this.title.length() * this.textSize + 4), this.originY + this.textSize + 4);
     }
 
     void render() {
