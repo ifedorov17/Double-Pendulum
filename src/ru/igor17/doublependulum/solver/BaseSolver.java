@@ -33,13 +33,15 @@ public abstract class BaseSolver {
 		this.theta2 = new ArrayList<>();
 		this.omega1 = new ArrayList<>();
 		this.omega2 = new ArrayList<>();
+
 		this.theta1.add(doublePendulum.getFirstSeg().getTheta());
 		this.theta2.add(doublePendulum.getSecondSeg().getTheta());
 		this.omega1.add(doublePendulum.getFirstSeg().getOmega());
 		this.omega2.add(doublePendulum.getSecondSeg().getOmega());
+
 	}
 
-
+  
 	protected double omega1Derivative(double theta1, double theta2, double omega1, double omega2) {
 		double m1 = this.doublePendulum.getFirstSeg().getMass();
 		double m2 = this.doublePendulum.getSecondSeg().getMass();
