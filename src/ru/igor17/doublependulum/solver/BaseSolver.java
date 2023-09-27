@@ -20,8 +20,6 @@ public abstract class BaseSolver {
 
 	protected ArrayList<Double> omega2;
 
-	protected ArrayList<Double> energy;
-
 	protected DoublePendulum doublePendulum;
 
 	protected double T;
@@ -35,36 +33,15 @@ public abstract class BaseSolver {
 		this.theta2 = new ArrayList<>();
 		this.omega1 = new ArrayList<>();
 		this.omega2 = new ArrayList<>();
-		this.energy = new ArrayList<>();
+
 		this.theta1.add(doublePendulum.getFirstSeg().getTheta());
 		this.theta2.add(doublePendulum.getSecondSeg().getTheta());
 		this.omega1.add(doublePendulum.getFirstSeg().getOmega());
 		this.omega2.add(doublePendulum.getSecondSeg().getOmega());
-		this.energy.add(calcEnergy(
-				doublePendulum.getFirstSeg().getTheta(),
-				doublePendulum.getSecondSeg().getTheta(),
-				doublePendulum.getFirstSeg().getOmega(),
-				doublePendulum.getSecondSeg().getOmega()
-		));
+
 	}
 
-	protected double calcEnergy (double theta1, double theta2, double omega1, double omega2) {
-		double m1 = this.doublePendulum.getFirstSeg().getMass();
-		double m2 = this.doublePendulum.getSecondSeg().getMass();
-		double l1 = this.doublePendulum.getFirstSeg().getLength();
-		double l2 = this.doublePendulum.getSecondSeg().getLength();
-		return (
-				m1 * l1 * l1 * omega1 * omega1 / 6
-						+ m2 * l1 * l1 * omega1 * omega1 / 2
-						+ m2 * l2 * l2 * omega2 * omega2 / 6
-						+ m2 * l1 * l2 * omega1 * omega2 * Math.cos(theta1 - theta2) / 2
-		) + (
-				- m1 * G * l1 * Math.cos(theta1) / 2
-						- m2 * G * l1 * Math.cos(theta1)
-						- m2 * G * l2 * Math.cos(theta2) / 2
-		);
-	}
-
+  
 	protected double omega1Derivative(double theta1, double theta2, double omega1, double omega2) {
 		double m1 = this.doublePendulum.getFirstSeg().getMass();
 		double m2 = this.doublePendulum.getSecondSeg().getMass();

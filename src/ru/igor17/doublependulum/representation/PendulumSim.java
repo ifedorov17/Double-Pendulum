@@ -42,8 +42,6 @@ public class PendulumSim {
 
     private TimeGraph omega2Graph;
 
-    private TimeGraph energyGraph;
-
 
     public PendulumSim (String problemFile) {
         this.tick = 0;
@@ -181,7 +179,6 @@ public class PendulumSim {
         this.theta2Graph.clear();
         this.omega1Graph.clear();
         this.omega2Graph.clear();
-        this.energyGraph.clear();
     }
 
     public void animate() {
@@ -194,14 +191,12 @@ public class PendulumSim {
         double theta2 = 0;
         double omega1 = 0;
         double omega2 = 0;
-        double energy = 0;
         switch (this.solverType) {
             case 0 -> {
                 theta1 = this.euSolver.getTheta1().get(this.tick);
                 theta2 = this.euSolver.getTheta2().get(this.tick);
                 omega1 = this.euSolver.getOmega1().get(this.tick);
                 omega2 = this.euSolver.getOmega2().get(this.tick);
-                energy = this.euSolver.getEnergy().get(this.tick);
             }
             case 1 -> {
                 theta1 = this.rkSolver.getTheta1().get(this.tick);
