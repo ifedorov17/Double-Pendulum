@@ -2,21 +2,21 @@
 	"title" : "Double compound pendulum",
 	"pendulumSegments" : [
 		{
-			"length" : 15,
-			"mass" : 1,
+			"length" : 100,
+			"mass" : 2,
 			"theta" : 1.5,
-			"omega" : 0.02
+			"omega" : 0.01
 		},
 		{
-			"length" : 50,
-			"mass" : 20,
+			"length" : 100,
+			"mass" : 2,
 			"theta" : 1.5,
 			"omega" : 0.01
 		}
 	],
 	"solveParameters" : {
-		"type" : "Runge-Kutta",
+		"type" : "Euler",
 		"dt" : 0.08,
-		"T" : 500
+		"T" : 50
 	}
 }

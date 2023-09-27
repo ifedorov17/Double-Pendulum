@@ -26,7 +26,6 @@ public class EuSolver extends BaseSolver {
             this.omega1.add(omega1);
             this.omega2.add(omega2);
 
-            this.energy.add(calcEnergy(theta1, theta2, omega1, omega2));
         }
     }
 
