@@ -1,3 +1,5 @@
+package ru.igor17.doublependulum.problem;
+
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -16,7 +18,7 @@ public class Initializer {
         return problem;
     }
 
-    void readProblem() throws FileNotFoundException {
+    public void readProblem() throws FileNotFoundException {
         Gson gson = new Gson();
         JsonReader reader = new JsonReader(new FileReader(this.problemFile));
         this.problem = gson.fromJson(reader, Problem.class);

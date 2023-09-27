@@ -1,3 +1,5 @@
+package ru.igor17.doublependulum.model;
+
 public class Segment {
     private double mass;
     private double length;

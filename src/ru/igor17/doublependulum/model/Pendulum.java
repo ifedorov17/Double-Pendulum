@@ -1,3 +1,6 @@
+package ru.igor17.doublependulum.model;
+
+import ru.igor17.doublependulum.App;
 import java.awt.Color;
 
 public class Pendulum {

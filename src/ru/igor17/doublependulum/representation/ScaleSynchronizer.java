@@ -1,3 +1,5 @@
+package ru.igor17.doublependulum.representation;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 

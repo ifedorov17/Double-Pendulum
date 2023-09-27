@@ -1,3 +1,15 @@
+package ru.igor17.doublependulum.representation;
+
+import ru.igor17.doublependulum.App;
+import ru.igor17.doublependulum.model.Dot;
+import ru.igor17.doublependulum.model.DoublePendulum;
+import ru.igor17.doublependulum.model.Pendulum;
+import ru.igor17.doublependulum.model.Segment;
+import ru.igor17.doublependulum.problem.Initializer;
+import ru.igor17.doublependulum.problem.Problem;
+import ru.igor17.doublependulum.solver.EuSolver;
+import ru.igor17.doublependulum.solver.RKSolver;
+
 import java.awt.Color;
 
 public class PendulumSim {
@@ -161,7 +173,7 @@ public class PendulumSim {
         return error;
     }
 
-    void solve() {
+    public void solve() {
         switch (this.solverType) {
             case 0 -> {
                 this.euSolver.solve();
@@ -172,7 +184,7 @@ public class PendulumSim {
         }
     }
 
-    void resetAnimationTick() {
+    public void resetAnimationTick() {
         this.tick = 0;
         this.theta1Graph.clear();
         this.theta2Graph.clear();
@@ -181,7 +193,7 @@ public class PendulumSim {
         this.energyGraph.clear();
     }
 
-    void animate() {
+    public void animate() {
         if (this.tick > this.animLength) {
             return;
         }

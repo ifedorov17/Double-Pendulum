@@ -1,13 +1,15 @@
+package ru.igor17.doublependulum.model;
+
 public class Dot {
     private double x;
     private double y;
 
-    Dot() {
+    public Dot() {
         this.x = 0;
         this.y = 0;
     }
 
-    Dot(double x, double y) {
+    public Dot(double x, double y) {
         this.x = x;
         this.y = y;
     }

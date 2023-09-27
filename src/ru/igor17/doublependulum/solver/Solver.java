@@ -1,3 +1,5 @@
+package ru.igor17.doublependulum.solver;
+
 public class Solver {
     private String type;
     private double dt;

@@ -1,4 +1,7 @@
+package ru.igor17.doublependulum;
+
 import processing.core.PApplet;
+import ru.igor17.doublependulum.representation.PendulumSim;
 
 public class App extends PApplet {
 
@@ -14,7 +17,7 @@ public class App extends PApplet {
         background(0);
         frameRate(1000);
         processingRef = this;
-        this.simulation = new PendulumSim("problem.json");
+        this.simulation = new PendulumSim("resources/problem.json");
         if (this.simulation.isError()) return;
         this.simulation.solve();
     }
@@ -30,6 +33,6 @@ public class App extends PApplet {
     }
 
     public static void main(String[] args) {
-        PApplet.main("App");
+        PApplet.main("ru.igor17.doublependulum.App");
     }
 }

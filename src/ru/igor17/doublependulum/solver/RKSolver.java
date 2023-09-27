@@ -1,4 +1,9 @@
+package ru.igor17.doublependulum.solver;
+
+import ru.igor17.doublependulum.model.DoublePendulum;
 import java.util.ArrayList;
+
+import static ru.igor17.doublependulum.App.G;
 
 public class RKSolver {
     private ArrayList<Double> theta1;
@@ -68,7 +73,7 @@ public class RKSolver {
         return energy;
     }
 
-    void solve() {
+    public void solve() {
         int steps = (int)(this.T / this.dt);
 
         for (int i = 1; i <= steps; i++) {
@@ -123,9 +128,9 @@ public class RKSolver {
                         + m2 * l2 * l2 * omega2 * omega2 / 6
                         + m2 * l1 * l2 * omega1 * omega2 * Math.cos(theta1 - theta2) / 2
         ) + (
-                - m1 * App.G * l1 * Math.cos(theta1) / 2
-                        - m2 * App.G * l1 * Math.cos(theta1)
-                        - m2 * App.G * l2 * Math.cos(theta2) / 2
+                - m1 * G * l1 * Math.cos(theta1) / 2
+                        - m2 * G * l1 * Math.cos(theta1)
+                        - m2 * G * l2 * Math.cos(theta2) / 2
         );
     }
 
@@ -138,7 +143,7 @@ public class RKSolver {
                 9 * omega1 * omega1 * l1 * m2 * Math.sin(2 * theta1 - 2 * theta2)
                         + 12 * m2 * l2 * omega2 * omega2 * Math.sin(theta1 - theta2)
                         + 12 * (3 * Math.sin(- 2 * theta2 + theta1) * m2 / 4 + Math.sin(theta1) * (m1 + 5 * m2 / 4))
-                        * App.G
+                        * G
 
         )
                 / (
@@ -152,10 +157,10 @@ public class RKSolver {
         double l1 = this.dPendulum.getFirstSeg().getLength();
         double l2 = this.dPendulum.getSecondSeg().getLength();
         return (
-                - 9 * App.G * Math.sin(2 * theta1 - theta2) * (m1 + 2 * m2)
+                - 9 * G * Math.sin(2 * theta1 - theta2) * (m1 + 2 * m2)
                         - 9 * m2 * l2 * omega2 * omega2 * Math.sin(2 * theta1 - 2 * theta2)
                         - 12 * l1 * omega1 * omega1 * (m1 + 3 * m2) * Math.sin(theta1 - theta2)
-                        + 3 * App.G * Math.sin(theta2) * (m1 + 6 * m2)
+                        + 3 * G * Math.sin(theta2) * (m1 + 6 * m2)
         )
                 / (
                 l2 * (9 * m2 * Math.cos(2 * theta1 - 2 * theta2) - 8 * m1 - 15 * m2)

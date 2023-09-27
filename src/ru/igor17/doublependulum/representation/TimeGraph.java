@@ -1,3 +1,8 @@
+package ru.igor17.doublependulum.representation;
+
+import ru.igor17.doublependulum.model.Dot;
+import ru.igor17.doublependulum.App;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;

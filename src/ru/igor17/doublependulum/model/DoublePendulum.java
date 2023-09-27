@@ -1,3 +1,5 @@
+package ru.igor17.doublependulum.model;
+
 public class DoublePendulum {
     private Pendulum firstSeg;
     private Pendulum secondSeg;
@@ -32,7 +34,7 @@ public class DoublePendulum {
         this.secondSeg.setTheta(theta2);
     }
 
-    void render() {
+    public void render() {
         this.firstSeg.render();
         this.secondSeg.render();
     }

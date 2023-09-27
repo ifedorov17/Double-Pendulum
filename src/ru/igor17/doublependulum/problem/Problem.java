@@ -1,3 +1,8 @@
+package ru.igor17.doublependulum.problem;
+
+import ru.igor17.doublependulum.model.Segment;
+import ru.igor17.doublependulum.solver.Solver;
+
 public class Problem {
     private String title;
     private Segment[] segments;
