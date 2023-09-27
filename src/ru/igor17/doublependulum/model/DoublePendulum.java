@@ -8,11 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DoublePendulum {
-    private Pendulum firstSeg;
-    private Pendulum secondSeg;
 
-    public void render() {
-        this.firstSeg.render();
-        this.secondSeg.render();
-    }
+    private PendulumSegment firstSeg;
+
+    private PendulumSegment secondSeg;
+
 }
