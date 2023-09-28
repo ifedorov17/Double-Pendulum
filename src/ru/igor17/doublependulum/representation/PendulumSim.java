@@ -108,9 +108,9 @@ public class PendulumSim {
             this.theta2Graph.setOrigin(1000, 0);
             this.theta2Graph.setPlainCl(new Color(0, 0, 0, 0));
             this.theta2Graph.setBorderCl(new Color(100, 100, 100));
-            this.theta2Graph.setDotCl(Color.MAGENTA);
-            this.theta2Graph.setLineCl(Color.MAGENTA);
-            this.theta2Graph.setLevelLineCl(Color.MAGENTA);
+            this.theta2Graph.setDotCl(Color.ORANGE);
+            this.theta2Graph.setLineCl(Color.ORANGE);
+            this.theta2Graph.setLevelLineCl(Color.ORANGE);
             this.theta2Graph.setValueTextCl(Color.DARK_GRAY);
             this.theta2Graph.setTitleTextCl(Color.DARK_GRAY);
             this.theta2Graph.setScaleTextCl(Color.DARK_GRAY);
@@ -128,9 +128,9 @@ public class PendulumSim {
             this.omega1Graph.setOrigin(1000, 300);
             this.omega1Graph.setPlainCl(new Color(255, 255, 255));
             this.omega1Graph.setBorderCl(new Color(100, 100, 100));
-            this.omega1Graph.setDotCl(Color.GREEN);
-            this.omega1Graph.setLineCl(Color.GREEN);
-            this.omega1Graph.setLevelLineCl(Color.GREEN);
+            this.omega1Graph.setDotCl(Color.BLUE);
+            this.omega1Graph.setLineCl(Color.BLUE);
+            this.omega1Graph.setLevelLineCl(Color.BLUE);
             this.omega1Graph.setValueTextCl(Color.DARK_GRAY);
             this.omega1Graph.setTitleTextCl(Color.DARK_GRAY);
             this.omega1Graph.setScaleTextCl(Color.DARK_GRAY);
@@ -143,9 +143,9 @@ public class PendulumSim {
             this.omega2Graph.setOrigin(1000, 300);
             this.omega2Graph.setPlainCl(new Color(0, 0, 0, 0));
             this.omega2Graph.setBorderCl(new Color(100, 100, 100));
-            this.omega2Graph.setDotCl(Color.MAGENTA);
-            this.omega2Graph.setLineCl(Color.MAGENTA);
-            this.omega2Graph.setLevelLineCl(Color.MAGENTA);
+            this.omega2Graph.setDotCl(Color.RED);
+            this.omega2Graph.setLineCl(Color.RED);
+            this.omega2Graph.setLevelLineCl(Color.RED);
             this.omega2Graph.setValueTextCl(Color.DARK_GRAY);
             this.omega2Graph.setTitleTextCl(Color.DARK_GRAY);
             this.omega2Graph.setScaleTextCl(Color.DARK_GRAY);
