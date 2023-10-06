@@ -11,12 +11,17 @@ import ru.igor17.doublependulum.solver.RKSolver;
 import java.awt.Color;
 
 import static ru.igor17.doublependulum.App.processingRef;
+import static ru.igor17.doublependulum.representation.SimulationProperties.BLACK_PLAIN_COLOR;
+import static ru.igor17.doublependulum.representation.SimulationProperties.BORDER_COLOR;
+import static ru.igor17.doublependulum.representation.SimulationProperties.DIM_X_GRAPHICS;
+import static ru.igor17.doublependulum.representation.SimulationProperties.DIM_Y_GRAPHICS;
+import static ru.igor17.doublependulum.representation.SimulationProperties.PENDULUM_DOT_COLOR;
+import static ru.igor17.doublependulum.representation.SimulationProperties.FIRST_FIX_POINT;
+import static ru.igor17.doublependulum.representation.SimulationProperties.SEGMENT_COLOR;
+import static ru.igor17.doublependulum.representation.SimulationProperties.SIMULATION_WIDTH;
+import static ru.igor17.doublependulum.representation.SimulationProperties.WHITE_PLAIN_COLOR;
 
 public class PendulumSim {
-
-    public static final Color SEGMENT_COLOR = new Color(20, 150, 170);
-
-    public static final Dot FIRST_FIX_POINT = new Dot(500, 500);
 
     private EuSolver euSolver;
 
@@ -88,11 +93,11 @@ public class PendulumSim {
 
             ScaleSynchronizer thetaScaleSynchronizer = new ScaleSynchronizer();
 
-            this.theta1Graph = new TimeGraph(1000, 300, graphCap);
+            this.theta1Graph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
             this.theta1Graph.setTitle("Theta");
-            this.theta1Graph.setOrigin(1000, 0);
-            this.theta1Graph.setPlainCl(new Color(255, 255, 255));
-            this.theta1Graph.setBorderCl(new Color(100, 100, 100));
+            this.theta1Graph.setOrigin(SIMULATION_WIDTH, 0);
+            this.theta1Graph.setPlainCl(WHITE_PLAIN_COLOR);
+            this.theta1Graph.setBorderCl(BORDER_COLOR);
             this.theta1Graph.setDotCl(Color.GREEN);
             this.theta1Graph.setLineCl(Color.GREEN);
             this.theta1Graph.setLevelLineCl(Color.GREEN);
@@ -103,11 +108,11 @@ public class PendulumSim {
             this.theta1Graph.setInteger(false);
             this.theta1Graph.setScaleSynchronizer(thetaScaleSynchronizer);
 
-            this.theta2Graph = new TimeGraph(1000, 300, graphCap);
+            this.theta2Graph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
             this.theta2Graph.setTitle("");
-            this.theta2Graph.setOrigin(1000, 0);
-            this.theta2Graph.setPlainCl(new Color(0, 0, 0, 0));
-            this.theta2Graph.setBorderCl(new Color(100, 100, 100));
+            this.theta2Graph.setOrigin(SIMULATION_WIDTH, 0);
+            this.theta2Graph.setPlainCl(BLACK_PLAIN_COLOR);
+            this.theta2Graph.setBorderCl(BORDER_COLOR);
             this.theta2Graph.setDotCl(Color.ORANGE);
             this.theta2Graph.setLineCl(Color.ORANGE);
             this.theta2Graph.setLevelLineCl(Color.ORANGE);
@@ -123,11 +128,11 @@ public class PendulumSim {
 
             ScaleSynchronizer omegaScaleSynchronizer = new ScaleSynchronizer();
 
-            this.omega1Graph = new TimeGraph(1000, 300, graphCap);
+            this.omega1Graph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
             this.omega1Graph.setTitle("Omega");
-            this.omega1Graph.setOrigin(1000, 300);
-            this.omega1Graph.setPlainCl(new Color(255, 255, 255));
-            this.omega1Graph.setBorderCl(new Color(100, 100, 100));
+            this.omega1Graph.setOrigin(SIMULATION_WIDTH, 300);
+            this.omega1Graph.setPlainCl(WHITE_PLAIN_COLOR);
+            this.omega1Graph.setBorderCl(BORDER_COLOR);
             this.omega1Graph.setDotCl(Color.BLUE);
             this.omega1Graph.setLineCl(Color.BLUE);
             this.omega1Graph.setLevelLineCl(Color.BLUE);
@@ -138,11 +143,11 @@ public class PendulumSim {
             this.omega1Graph.setInteger(false);
             this.omega1Graph.setScaleSynchronizer(omegaScaleSynchronizer);
 
-            this.omega2Graph = new TimeGraph(1000, 300, graphCap);
+            this.omega2Graph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
             this.omega2Graph.setTitle("");
-            this.omega2Graph.setOrigin(1000, 300);
-            this.omega2Graph.setPlainCl(new Color(0, 0, 0, 0));
-            this.omega2Graph.setBorderCl(new Color(100, 100, 100));
+            this.omega2Graph.setOrigin(SIMULATION_WIDTH, 300);
+            this.omega2Graph.setPlainCl(BLACK_PLAIN_COLOR);
+            this.omega2Graph.setBorderCl(BORDER_COLOR);
             this.omega2Graph.setDotCl(Color.RED);
             this.omega2Graph.setLineCl(Color.RED);
             this.omega2Graph.setLevelLineCl(Color.RED);
@@ -243,10 +248,10 @@ public class PendulumSim {
                 (float)endPoint1.getX(),
                 (float)endPoint1.getY());
 
-        processingRef.stroke(Color.CYAN.getRGB());
+        processingRef.stroke(PENDULUM_DOT_COLOR.getRGB());
         processingRef.circle((float)firstSegment.getFixPoint().getX(),
                 (float)firstSegment.getFixPoint().getY(), 5);
-        processingRef.stroke(Color.ORANGE.getRGB());
+        processingRef.stroke(PENDULUM_DOT_COLOR.getRGB());
         processingRef.circle((float)endPoint1.getX(), (float)endPoint1.getY(), 5);
 
 
@@ -263,10 +268,10 @@ public class PendulumSim {
                 (float)endPoint2.getX(),
                 (float)endPoint2.getY());
 
-        processingRef.stroke(Color.CYAN.getRGB());
+        processingRef.stroke(PENDULUM_DOT_COLOR.getRGB());
         processingRef.circle((float)secondSegment.getFixPoint().getX(),
                 (float)secondSegment.getFixPoint().getY(), 5);
-        processingRef.stroke(Color.ORANGE.getRGB());
+        processingRef.stroke(PENDULUM_DOT_COLOR.getRGB());
         processingRef.circle((float)endPoint2.getX(), (float)endPoint2.getY(), 5);
     }
 }
