@@ -3,13 +3,19 @@ package ru.igor17.doublependulum;
 import processing.core.PApplet;
 import ru.igor17.doublependulum.representation.PendulumSim;
 
+import static ru.igor17.doublependulum.representation.SimulationProperties.DIM_X_GRAPHICS;
+import static ru.igor17.doublependulum.representation.SimulationProperties.DIM_Y_GRAPHICS;
+import static ru.igor17.doublependulum.representation.SimulationProperties.SIMULATION_WIDTH;
+
 public class App extends PApplet {
 
     public static PApplet processingRef;
     public PendulumSim simulation;
-    public static double G = 9.81;
+    public static final double G = 9.81;
+
+    @Override
     public void settings() {
-        size(2000, 1000);
+        size(SIMULATION_WIDTH + DIM_X_GRAPHICS, DIM_Y_GRAPHICS * 2);
     }
 
     @Override
