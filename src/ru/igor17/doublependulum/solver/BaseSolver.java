@@ -20,6 +20,8 @@ public abstract class BaseSolver {
 
 	protected ArrayList<Double> omega2;
 
+	protected ArrayList<Double> energy;
+
 	protected DoublePendulum doublePendulum;
 
 	protected double T;
@@ -33,11 +35,19 @@ public abstract class BaseSolver {
 		this.theta2 = new ArrayList<>();
 		this.omega1 = new ArrayList<>();
 		this.omega2 = new ArrayList<>();
+		this.energy = new ArrayList<>();
 
 		this.theta1.add(doublePendulum.getFirstSeg().getTheta());
 		this.theta2.add(doublePendulum.getSecondSeg().getTheta());
 		this.omega1.add(doublePendulum.getFirstSeg().getOmega());
 		this.omega2.add(doublePendulum.getSecondSeg().getOmega());
+
+		this.energy.add(calcEnergy(
+				doublePendulum.getFirstSeg().getTheta(),
+				doublePendulum.getSecondSeg().getTheta(),
+				doublePendulum.getFirstSeg().getOmega(),
+				doublePendulum.getSecondSeg().getOmega()
+		));
 	}
 
 	protected double omega1Derivative(double theta1, double theta2, double omega1, double omega2) {
@@ -79,6 +89,20 @@ public abstract class BaseSolver {
 
 	protected double theta2Derivative(double omega2) {
 		return omega2;
+	}
+
+	double calcEnergy (double theta1, double theta2, double omega1, double omega2) {
+
+		return - (
+				this.doublePendulum.getFirstSeg().getMass() * this.doublePendulum.getFirstSeg().getLength() * this.doublePendulum.getFirstSeg().getLength() * omega1 * omega1 / 6
+						+ this.doublePendulum.getSecondSeg().getMass() * this.doublePendulum.getFirstSeg().getLength() * this.doublePendulum.getFirstSeg().getLength() * omega1 * omega1 / 2
+						+ this.doublePendulum.getSecondSeg().getMass() * this.doublePendulum.getSecondSeg().getLength() * this.doublePendulum.getSecondSeg().getLength() * omega2 * omega2 / 6
+						+ this.doublePendulum.getSecondSeg().getMass() * this.doublePendulum.getFirstSeg().getLength() * this.doublePendulum.getSecondSeg().getLength() * omega1 * omega2 * Math.cos(theta1 - theta2) / 2
+		) - (
+				- this.doublePendulum.getFirstSeg().getMass() * G * this.doublePendulum.getFirstSeg().getLength() * Math.cos(theta1) / 2
+						- this.doublePendulum.getSecondSeg().getMass() * G * this.doublePendulum.getFirstSeg().getLength() * Math.cos(theta1)
+						- this.doublePendulum.getSecondSeg().getMass() * G * this.doublePendulum.getFirstSeg().getLength() * Math.cos(theta2) / 2
+		);
 	}
 
 }

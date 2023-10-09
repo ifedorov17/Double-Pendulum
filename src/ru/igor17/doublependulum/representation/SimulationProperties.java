@@ -8,9 +8,11 @@ public class SimulationProperties {
 
 	public static final int DIM_X_GRAPHICS = 800;
 
-	public static final int DIM_Y_GRAPHICS = 300;
+	public static final int DIM_Y_GRAPHICS = 200;
 
 	public static final int SIMULATION_WIDTH = 600;
+
+	public static final int SIMULATION_HEIGHT = 600;
 
 	public static final Dot FIRST_FIX_POINT = new Dot(SIMULATION_WIDTH/2, DIM_Y_GRAPHICS);
 

@@ -304,7 +304,7 @@ public class TimeGraph {
     void renderTitle() {
         processingRef.fill(this.titleTextCl.getRGB());
         processingRef.textSize(this.textSize);
-        processingRef.text(this.title, this.originX + this.dimX - (this.title.length() * this.textSize + 4f), this.originY + this.textSize + 4f);
+        processingRef.text(this.title, this.originX + 4f, this.originY + this.textSize + 24f);
     }
 
     void render() {

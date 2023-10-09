@@ -47,6 +47,8 @@ public class PendulumSim {
 
     private TimeGraph omega2Graph;
 
+    private TimeGraph energyGraph;
+
 
     public PendulumSim (String problemFile) {
         this.tick = 0;
@@ -94,7 +96,7 @@ public class PendulumSim {
             ScaleSynchronizer thetaScaleSynchronizer = new ScaleSynchronizer();
 
             this.theta1Graph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
-            this.theta1Graph.setTitle("Theta");
+            this.theta1Graph.setTitle("Theta1 (green), Theta2 (orange)");
             this.theta1Graph.setOrigin(SIMULATION_WIDTH, 0);
             this.theta1Graph.setPlainCl(WHITE_PLAIN_COLOR);
             this.theta1Graph.setBorderCl(BORDER_COLOR);
@@ -129,8 +131,8 @@ public class PendulumSim {
             ScaleSynchronizer omegaScaleSynchronizer = new ScaleSynchronizer();
 
             this.omega1Graph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
-            this.omega1Graph.setTitle("Omega");
-            this.omega1Graph.setOrigin(SIMULATION_WIDTH, 300);
+            this.omega1Graph.setTitle("Omega1 (blue), Omega2 (red)");
+            this.omega1Graph.setOrigin(SIMULATION_WIDTH, DIM_Y_GRAPHICS);
             this.omega1Graph.setPlainCl(WHITE_PLAIN_COLOR);
             this.omega1Graph.setBorderCl(BORDER_COLOR);
             this.omega1Graph.setDotCl(Color.BLUE);
@@ -145,7 +147,7 @@ public class PendulumSim {
 
             this.omega2Graph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
             this.omega2Graph.setTitle("");
-            this.omega2Graph.setOrigin(SIMULATION_WIDTH, 300);
+            this.omega2Graph.setOrigin(SIMULATION_WIDTH, DIM_Y_GRAPHICS);
             this.omega2Graph.setPlainCl(BLACK_PLAIN_COLOR);
             this.omega2Graph.setBorderCl(BORDER_COLOR);
             this.omega2Graph.setDotCl(Color.RED);
@@ -160,6 +162,20 @@ public class PendulumSim {
 
             omegaScaleSynchronizer.addGraph(omega1Graph);
             omegaScaleSynchronizer.addGraph(omega2Graph);
+
+            this.energyGraph = new TimeGraph(DIM_X_GRAPHICS, DIM_Y_GRAPHICS, graphCap);
+            this.energyGraph.setTitle("Energy");
+            this.energyGraph.setOrigin(SIMULATION_WIDTH, DIM_Y_GRAPHICS*2);
+            this.energyGraph.setPlainCl(new Color(255, 255, 255));
+            this.energyGraph.setBorderCl(new Color(100, 100, 100));
+            this.energyGraph.setDotCl(Color.CYAN);
+            this.energyGraph.setLineCl(Color.CYAN);
+            this.energyGraph.setLevelLineCl(Color.CYAN);
+            this.energyGraph.setValueTextCl(Color.DARK_GRAY);
+            this.energyGraph.setTitleTextCl(Color.DARK_GRAY);
+            this.energyGraph.setScaleTextCl(Color.DARK_GRAY);
+            this.energyGraph.setTextSize(12);
+            this.energyGraph.setInteger(false);
         }
     }
 
@@ -184,6 +200,7 @@ public class PendulumSim {
         this.theta2Graph.clear();
         this.omega1Graph.clear();
         this.omega2Graph.clear();
+        this.energyGraph.clear();
     }
 
     public void animate() {
@@ -196,18 +213,21 @@ public class PendulumSim {
         double theta2 = 0;
         double omega1 = 0;
         double omega2 = 0;
+        double energy = 0;
         switch (this.solverType) {
             case 0 -> {
                 theta1 = this.euSolver.getTheta1().get(this.tick);
                 theta2 = this.euSolver.getTheta2().get(this.tick);
                 omega1 = this.euSolver.getOmega1().get(this.tick);
                 omega2 = this.euSolver.getOmega2().get(this.tick);
+                energy = this.euSolver.getEnergy().get(this.tick);
             }
             case 1 -> {
                 theta1 = this.rkSolver.getTheta1().get(this.tick);
                 theta2 = this.rkSolver.getTheta2().get(this.tick);
                 omega1 = this.rkSolver.getOmega1().get(this.tick);
                 omega2 = this.rkSolver.getOmega2().get(this.tick);
+                energy = this.rkSolver.getEnergy().get(this.tick);
             }
         }
 
@@ -223,6 +243,7 @@ public class PendulumSim {
             this.theta2Graph.addValue(theta2);
             this.omega1Graph.addValue(omega1);
             this.omega2Graph.addValue(omega2);
+            this.energyGraph.addValue(energy);
         }
 
         renderDoublePendulum(dPendulum);
@@ -230,6 +251,7 @@ public class PendulumSim {
         this.theta2Graph.render();
         this.omega1Graph.render();
         this.omega2Graph.render();
+        this.energyGraph.render();
         this.tick += 1;
     }
 
