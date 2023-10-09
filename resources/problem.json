@@ -3,19 +3,19 @@
 	"pendulumSegments" : [
 		{
 			"length" : 100,
-			"mass" : 2,
+			"mass" : 10,
 			"theta" : 1.5,
-			"omega" : 0.01
+			"omega" : 0.0
 		},
 		{
 			"length" : 100,
-			"mass" : 2,
-			"theta" : 1.5,
-			"omega" : 0.01
+			"mass" : 10,
+			"theta" : 0.0,
+			"omega" : 0.0
 		}
 	],
 	"solveParameters" : {
-		"type" : "Euler",
+		"type" : "Runge-Kutta",
 		"dt" : 0.08,
 		"T" : 50
 	}

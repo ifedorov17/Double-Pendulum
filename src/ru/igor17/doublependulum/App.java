@@ -5,6 +5,7 @@ import ru.igor17.doublependulum.representation.PendulumSim;
 
 import static ru.igor17.doublependulum.representation.SimulationProperties.DIM_X_GRAPHICS;
 import static ru.igor17.doublependulum.representation.SimulationProperties.DIM_Y_GRAPHICS;
+import static ru.igor17.doublependulum.representation.SimulationProperties.SIMULATION_HEIGHT;
 import static ru.igor17.doublependulum.representation.SimulationProperties.SIMULATION_WIDTH;
 
 public class App extends PApplet {
@@ -15,13 +16,13 @@ public class App extends PApplet {
 
     @Override
     public void settings() {
-        size(SIMULATION_WIDTH + DIM_X_GRAPHICS, DIM_Y_GRAPHICS * 2);
+        size(SIMULATION_WIDTH + DIM_X_GRAPHICS, SIMULATION_HEIGHT);
     }
 
     @Override
     public void setup() {
         background(0);
-        frameRate(1000);
+        frameRate(60);
         processingRef = this;
         this.simulation = new PendulumSim("resources/problem.json");
         if (this.simulation.isError()) return;
